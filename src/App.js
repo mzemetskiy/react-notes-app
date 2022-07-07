@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import NotesList from "./components/NotesList"
+import NotesEdit from "./components/NotesEdit"
+import NotesMenu from "./components/NotesMenu";
+import "./App.css"
+import { nanoid } from 'nanoid'
 
-function App() {
+const App = () => {
+  const [notes, setNotes] = useState([
+    {title: "Note Title", content: "Write any useful information here!", isCurrent: true, id: nanoid()}
+  ])
+
+  const [styles, setStyles] = useState({scale: 1, align: "justify"})
+  console.log(styles)
+
+  let scaleStyle = {
+    scale: `${styles.scale}`,
+  }
+
+  let alignStyle = {
+    textAlign: `${styles.align}`,
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <NotesMenu 
+        styles={styles}
+        setStyles={setStyles}
+        setNotes={setNotes}
+      />
+      <NotesEdit  
+        notes={notes}
+        setNotes={setNotes}
+        scaleStyle={scaleStyle}
+        alignStyle={alignStyle}
+      />
+      <NotesList 
+        notes={notes}
+        setNotes={setNotes} 
+      />
+    </>
+  )
 }
 
-export default App;
+export default App

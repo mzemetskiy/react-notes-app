@@ -1,38 +1,236 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#root {
+  background-color: grey;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* 
+NOTE LIST
+*/
+
+#display-notes {
+  position: absolute;
+  top: 81px;
+  right: 30px;
+  border-radius: 10px;
+  height: auto;
+  width: 300px;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.5) 0px 6px 12px -2px, rgba(0, 0, 0, 0.6) 0px 3px 7px -3px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#display-notes > h3 {
+  height: auto;
+  width: 300px;
+  text-align: center;
+  padding: 10px 20px 10px 20px;
+  font-size: 1.2rem;
+  color: rgb(41, 41, 41);
+}
+
+.note-list {
+  cursor: pointer;
+  height: auto;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px 5px 20px;
+  font-size: 1.2rem;
+  color: rgb(41, 41, 41);
+}
+
+.note-list:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.change-note {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  cursor: pointer;
+  height: 24px;
+  width: 220px;
+  text-align: left;
+}
+
+#close {
+  filter: invert(51%) sepia(93%) saturate(0%) hue-rotate(231deg) brightness(79%) contrast(86%);
+  height: 31px;
+}
+
+.note-list-hr {
+  height: 1px;
+  width: 300px;
+  background-color: rgb(214, 214, 214);
+  display: block;
+}
+
+#create-button {
+  cursor: pointer;
+  height: 40px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#create-button:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+#create-button > img {
+  height: 30px;
+}
+
+/* 
+EDIT 
+*/
+
+#note {
+  height: 500px;
+  width: min(500px, 100vw);
+  background-color: #fff7e2;
+  box-shadow: rgba(50, 50, 93, 0.5) 0px 6px 12px -2px, rgba(0, 0, 0, 0.6) 0px 3px 7px -3px;
+}
+
+#title {
+  height: 50px;
+  width: min(500px, 100vw);
+  font-size: 1.75rem;
+  padding: 0 20px 0 20px;
+  margin-top: 10px;
+  box-shadow: 0 -10px #fdf1b0;
+}
+
+#content {
+  height: 390px;
+  width: min(500px, 100vw);
+  padding: 20px;
+  font-size: 1.2rem;
+  resize: none;
+}
+
+#information {
+  height: 50px;
+  padding: 5px 15px 5px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #fdf1b0;
+  border-style: solid none none none;
+}
+
+/* 
+MENU  
+*/
+
+#menu {
+  position: absolute;
+  top: 0;
+  list-style: none;
+  height: auto;
+  width: 100vw;
+  padding: 5px 30px 5px 30px;
+  background-color: #ffffff;
+  border: 1px solid rgb(43, 43, 43);
+  border-style: none none solid none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.menu-icon {
+  cursor: pointer;
+  height: min(20px);
+  margin: 2px 20px 2px 0;
+  filter: invert(51%) sepia(93%) saturate(0%) hue-rotate(231deg) brightness(50%) contrast(86%);
+}
+
+.menu-break {
+  height: 30px;
+  width: 1px;
+  border-left: 2px #cfcfcf solid;
+  margin: 5px 20px 5px 0;
+}
+
+#trash {
+  margin-left: auto;
+  width: 24px;
+}
+
+@media only screen and (max-width: 520px) {
+  #menu {
+    justify-content: center;
   }
-  to {
-    transform: rotate(360deg);
+  #trash {
+    margin-left: 0;
   }
+}
+@media only screen and (max-width: 1175px) {
+  #note {
+    margin-bottom: min(500px, 20vh);
+    height: calc(50vh + 10px);
+  }
+  #display-notes {
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+  }
+  #information {
+    height: 6vh;
+  }
+  #title {
+    height: 5vh;
+  }
+  #content {
+    height: 39vh;
+  }
+}
+@media only screen and (min-height: 2100px) {
+  #display-notes {
+    scale: 2;
+    top: 275px;
+    right: 200px;
+  }
+  #menu {
+    padding: 30px 60px 30px 60px;
+  }
+  .menu-icon {
+    filter: none;
+    height: 60px;
+    margin: 0 20px 0 20px;
+  }
+  #trash {
+    width: 100px;
+  }
+  .menu-break {
+    height: 80px;
+    margin: 0 20px 0 20px;
+    border-left: 5px solid #cfcfcf;
+  }
+  
 }
